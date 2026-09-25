@@ -26,9 +26,22 @@ body {
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-y: none;
 }
 
-.app { max-width: 1280px; margin: 0 auto; padding: 20px 16px 32px; }
+button { touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+
+/* Ana ekrandan açıldığında çentik ve ana ekran çubuğu için boşluk */
+.app {
+  max-width: 1280px; margin: 0 auto;
+  padding:
+    calc(20px + env(safe-area-inset-top))
+    calc(16px + env(safe-area-inset-right))
+    calc(32px + env(safe-area-inset-bottom))
+    calc(16px + env(safe-area-inset-left));
+}
 .gold { color: var(--gold); }
 .muted { color: var(--muted); }
 .small { font-size: 12px; line-height: 1.5; margin: 0; }
