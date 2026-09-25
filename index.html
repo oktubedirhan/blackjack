@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerçek Deste Blackjack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">♠</span>
+        <div>
+          <h1>Gerçek Deste Blackjack</h1>
+          <p>Kartlar rastgele üretilmez: her kart tek bir karılmış destenin üstünden çekilir</p>
+        </div>
+      </div>
+      <div class="bank">
+        <div class="stat"><span class="label">Bakiye</span><span id="balance" class="value gold">1.000</span></div>
+        <div class="stat"><span class="label">Masadaki bahis</span><span id="bet" class="value">0</span></div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="table" aria-label="Blackjack masası">
+        <div class="zone">
+          <div class="zone-head"><span>Krupiye</span><span class="total" id="dealer-total" hidden></span></div>
+          <div class="cards" id="dealer-cards"></div>
+        </div>
+
+        <div class="center-line">
+          <div class="rules">Blackjack 3:2 öder · Krupiye soft 17'de durur</div>
+          <div class="message" id="message" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="zone">
+          <div class="hands" id="player-hands"></div>
+        </div>
+
+        <div class="controls">
+          <div id="betting-controls" class="betting">
+            <div class="chips">
+              <button class="chip" data-chip="10" style="--c:#4a6f8a">10</button>
+              <button class="chip" data-chip="25" style="--c:#2f8a55">25</button>
+              <button class="chip" data-chip="50" style="--c:#b8333a">50</button>
+              <button class="chip" data-chip="100" style="--c:#1f1f24">100</button>
+              <button class="chip" data-chip="500" style="--c:#6d3fa0">500</button>
+            </div>
+            <div class="row">
+              <button class="btn ghost" id="btn-clear">Temizle</button>
+              <button class="btn ghost" id="btn-rebet">Önceki bahis</button>
+              <button class="btn ghost" id="btn-refill" hidden>Bakiyeyi yenile</button>
+              <button class="btn primary" id="btn-deal">Dağıt <kbd>Enter</kbd></button>
+            </div>
+          </div>
+
+          <div id="action-controls" class="row" hidden>
+            <button class="btn" id="btn-hit">Kart çek <kbd>H</kbd></button>
+            <button class="btn" id="btn-stand">Dur <kbd>S</kbd></button>
+            <button class="btn" id="btn-double">İkiye katla <kbd>D</kbd></button>
+            <button class="btn" id="btn-split">Böl <kbd>P</kbd></button>
+          </div>
+
+          <div id="finished-controls" class="row" hidden>
+            <button class="btn primary" id="btn-next">Yeni el <kbd>Enter</kbd></button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Deste <span id="deck-number" class="gold">#1</span></h2>
+            <span class="muted" id="deck-remaining">52 / 52 kart</span>
+          </div>
+          <div class="shoe" id="shoe" aria-hidden="true"></div>
+          <div class="progress"><div id="deck-progress"></div></div>
+          <p class="muted small">Deste bitince kenara konur, yeni bir 52'lik deste açılıp karılır ve oyun oradan devam eder.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Açılan kartlar</h2>
+            <span class="muted" id="seen-count">0 açıldı</span>
+          </div>
+          <div class="tracker" id="tracker"></div>
+          <p class="muted small" id="tracker-stats"></p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Geçmiş</h2></div>
+          <ol class="history" id="history"></ol>
+        </div>
+
+        <button class="link-btn" id="btn-reset">Oyunu sıfırla</button>
+      </aside>
+    </main>
+  </div>
+
+  <div class="shuffle-overlay" id="shuffle-overlay" hidden>
+    <div class="shuffle-box">
+      <div class="riffle" aria-hidden="true">
+        <span class="c l" style="--i:0"></span><span class="c l" style="--i:1"></span><span class="c l" style="--i:2"></span><span class="c l" style="--i:3"></span>
+        <span class="c r" style="--i:0"></span><span class="c r" style="--i:1"></span><span class="c r" style="--i:2"></span><span class="c r" style="--i:3"></span>
+      </div>
+      <h3>Yeni deste <span id="shuffle-deck-no">#1</span> karılıyor</h3>
+      <p>52 kart · Fisher–Yates karıştırma</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
