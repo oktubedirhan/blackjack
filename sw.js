@@ -1,6 +1,6 @@
 // Uygulama dosyalarını önbelleğe alır; internet yokken de oyun açılır.
 // Dosyalar değiştiğinde VERSION'ı artır ki telefonlar yeni sürümü alsın.
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = `blackjack-${VERSION}`;
 const SHELL = [
   './',
